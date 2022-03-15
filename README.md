@@ -1,5 +1,6 @@
 # Day_Trip_Gen
 1st individual project from dCC
+
 User Stories
 
 Total Unweighted Project Points: /70
