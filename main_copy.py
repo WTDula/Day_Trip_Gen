@@ -7,23 +7,18 @@ def main():
     attractions = ["The Bourbon Trail", "Willis Tower (Sears Tower)", "Live Music at Sixth Street", "The National Mall"]
     trip_details = []
 
-    def display_welcome_message():
-        print("Welcome to the Day Trip Generator!  I am sure we can plan an exciting adventure for you.")
+    
 
-    def roll_destinations(string, cb):
-        destination_choice = random.choice(destinations) # random destination from destinations list
-        # initial display/confirmation
-        user_choice = input(f"We have selected {destination_choice} as your destination.  Does this sound fun? Enter y/n: ")
-        user_choice = user_choice.lower() # make sure input is lower case y/n
-        # if user does not like destination, print message and get a new random destination
-        if(user_choice == "n"):
+    def roll_destinations(destinations_list, initial_choice):
+        split_this_list = initial_choice(destinations_list)
+        if(split_this_list[1] == False):
             print("Sorry you did not like this destination. We will choose a new one.")
             roll_destinations()
         else:
             # when confirmed, display affirmation message
             print("Excellent! It's a great place to visit!")
-            # when confirmed, append choice to trip_details at index 0
-            trip_details.append(destination_choice)
+            # when confirmed, return chosen destination
+            return split_this_list[0]
         
 
     def roll_transportation():
@@ -38,6 +33,7 @@ def main():
             # when confirmed, display affimation message, append choice to trip_details at index 1
             print("Excellent!")
             trip_details.append(transportation_choice)
+            # return trip_details]
 
 
     def roll_restaurants():
@@ -52,6 +48,7 @@ def main():
             # When confirmed, display affirmation message, append choice to trip_details at index 2
             print("Excellent! We're sure you'll have a fantastic meal!")
             trip_details.append(restaurant_choice)
+            # return trip_details
 
     def roll_attractions():
         attraction_choice = random.choice(attractions) # random attraction from attractions list
@@ -65,6 +62,7 @@ def main():
             # When confirmed, display affirmation message, append choice to trip_details at index 3
             print("Excellent! You're gonna have a lot of fun!")
             trip_details.append(attraction_choice)
+            # return trip_details
 
     # destination will be at trip_details[0], transpo at [1], restaurant at [2], attraction at [3]
     def display_final_details():
@@ -88,9 +86,23 @@ def main():
         # Combine all details into one message
         print(f"Get ready for the time of your life!  You will arrive in {trip_details[0]} via {trip_details[1]}.  You will dine at {trip_details[2]}, and go see {trip_details[3]}!  Have Fun!!")
     
+    def initial_choice(category):
+        return_list = []
+        category_choice = random.choice(category)
+        return_list.append(category_choice)
+        user_choice = input(f"We have selected {category_choice}. Is this acceptable? Enter y/n: ")
+        user_choice = user_choice.lower()
+        if(user_choice == "n"):
+            return_list.append(False)
+        else:
+            return_list.append(True)
+        return return_list
+            
+
+
     # Function calls
-    display_welcome_message()
-    roll_destinations()
+    print(f"Welcome to the Day Trip Generator!  I am sure we can plan an exciting adventure for you.")
+    trip_details.append(roll_destinations(destinations, initial_choice))
     roll_transportation()
     roll_restaurants()
     roll_attractions()
