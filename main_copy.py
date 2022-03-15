@@ -110,16 +110,3 @@ def main():
 
 
 main()
-
-
-
-
-
-def child_func (num):
-    pass
-
-def parent_func(num,cb):
-    cb(num)
-    pass
-
-parent_func(12, child_func)

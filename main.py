@@ -96,5 +96,3 @@ def main():
     roll_attractions()
     display_final_details()
 
-
-main()
